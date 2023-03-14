@@ -1,3 +1,4 @@
+from info import info
 import json
 import ortools.algorithms.pywrapknapsack_solver
 
@@ -5,6 +6,7 @@ import ortools.algorithms.pywrapknapsack_solver
 
 def handle(pb2_request, repo_path):
   knapsack_instance = json.loads(pb2_request.input)
+  info(knapsack_instance)
 
   values = knapsack_instance["values"]
   weights = knapsack_instance["weights"]
@@ -15,6 +17,9 @@ def handle(pb2_request, repo_path):
     ortools.algorithms.pywrapknapsack_solver.KnapsackSolver.
     KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER, 'KnapsackExample')
 
+  info(values)
+  info(weights)
+  info(capacities)
   solver.Init(values, weights, capacities)
   computed_value = solver.Solve()
 
